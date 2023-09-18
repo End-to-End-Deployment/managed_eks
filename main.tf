@@ -79,6 +79,8 @@ data "aws_ssm_parameter" "eks_ami_release_version" {
   name = "/aws/service/eks/optimized-ami/${aws_eks_cluster.my_cluster.version}/amazon-linux-2/recommended/release_version"
 }
 
+##Node Group
+
 resource "aws_eks_node_group" "my_node_group" {
   cluster_name    = aws_eks_cluster.my_cluster.name
   node_group_name = "my-node-group"
@@ -132,9 +134,10 @@ resource "aws_iam_role_policy_attachment" "example-AmazonEKS_CNI_Policy" {
 }
 
 
-variable "aws_region"{
-  default = "us-east-1"
+output "eks_node_group_name" {
+  value = aws_eks_node_group.my_node_group.node_group_name
 }
+
 
 variable "networking" {
   type = object({
