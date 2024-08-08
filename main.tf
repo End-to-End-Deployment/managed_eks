@@ -255,5 +255,12 @@ resource "aws_route_table_association" "private_table_association" {
   route_table_id = aws_route_table.private_tables[count.index].id
 }
 
+# Output 
+output "kubeconfig" {
+  value = aws_eks_cluster.my_cluster.kubeconfig
+  sensitive = true
+}
+
+
 
 
